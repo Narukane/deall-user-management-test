@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-management-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-management
+  template:
+    metadata:
+      labels:
+        app: user-management
+    spec:
+      containers:
+        - name: user-management
+          image: user-management:1.0
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: user-management-configmap
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo
+          ports:
+            - containerPort: 27017
+            
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-management-configmap
+data:
+  PORT: "3000"
+  JWT_SECRET: "dummyKey"
+  MONGO_URI: "mongodb://mongodb:27017/db_user"

@@ -1,0 +1,15 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: user-management:1.0
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
