@@ -33,4 +33,4 @@ In my local server i made the admin credentials
 
 -   create the docker image using the following command `docker-compose up --build`
 -   make sure the image exists user-management:1.0 and mongodb
--   deploy on kubernetes using the following commands `kubectl deploy -f kubernetes/deployment.yaml` and `kubectl deploy -f kubernetes/service.yaml
+-   deploy on kubernetes using the following commands `kubectl deploy -f kubernetes/deployment.yaml` and `kubectl deploy -f kubernetes/service.yaml`
